@@ -1,0 +1,114 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="{% static 'portal/loginStyle.css' %}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@500;700&family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+    <title>Portal Społecznościowy</title>
+  </head>
+  <body>
+    <main>
+        <div class="overlay"></div>
+        <img src ="{% static 'portal/firends_rm.png' %}" class ="friends">
+        <img src ="{% static 'portal/wood_rm.png' %}" class ="wood">
+        <h2 class="big-text">Portal</h2>
+
+                <div class="info">
+          <div id="circle2"></div>
+        </div>
+
+      <div class="info">
+        <div id="circle">
+          <div class="feature one">
+                <div class="wrapper">
+                 <div class="title">Sign in</div>
+                 <form action="#" method="POST">
+                   {% csrf_token %}
+                   <div class="field">
+                     <input type="text" name="username" value="" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" class="textinput textInput form-control" required="" id="id_username">
+                     <label>Email address</label>
+                   </div>
+                 <div class="field">
+                   <input type="password" name="password" autocomplete="current-password" class="textinput textInput form-control" required="" id="id_password">
+                   <label>Password</label>
+                 </div>
+                 <div class="field">
+                   <input type="submit" value="Login">
+                   {% if messages %}
+                     {% for message in messages %}
+                       <div class="alert alert-{{message.tags}}">
+                         {{ message }}
+                       </div>
+                     {% endfor %}
+                   {% endif %}
+                 </div>
+                 </form>
+                </div>
+          </div>
+          <div class="feature two">
+
+          </div>
+        </div>
+      </div>
+      <section class="landing">
+        <nav>
+          <h1 id="logo">Logo</h1>
+          <div class="nav-links">
+            <ul class="nav-links">
+              <li><a href="#">Home</a></li>
+              <li><a onclick="pressed_log()" href="#">Login</a></li>
+              <li><a onclick="pressed_reg()" href="register">Sign up</a></li>
+            </ul>
+          </div>
+        </nav>
+
+
+
+
+
+        <!--
+        <div class="overlay"></div>
+        <img src ="./firends_rm.png" class ="friends">
+        <img src ="./wood_rm.png" class ="wood">
+        <h2 class="big-text">Facebook 2.0</h2>
+
+                <div class="info">
+          <div id="circle">
+            <div class="feauter"></div>
+            <div class="feauter"></div>
+            <div class="feauter"></div>
+            <div class="feauter"></div>
+          </div>
+        </div>
+        //-->
+      </section>
+    </main>
+    <div class="intro">
+      <div class="intro-text">
+        <h1 class="hide">
+          <span class="text">Welcome</span>
+        </h1>
+        <h1 class="hide">
+          <span class="text">at Portal</span>
+        </h1>
+        <h1 class="hide">
+          <span class="text">Try it out!</span>
+        </h1>
+      </div>
+    </div>
+    <div class="slider"></div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"
+      integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'portal/loginApp.js' %}""></script>
+
+  </body>
+</html>
