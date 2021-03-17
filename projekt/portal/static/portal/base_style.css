@@ -27,7 +27,7 @@ body {
 }
 .text {
   height:200px;
-  background-color: #aaa;
+  background-color: #C1C1B9;
   width: 100%;
   padding: 20px;
 }
@@ -48,7 +48,7 @@ body {
     position: relative;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
+    background: linear-gradient(to right, #9c27b0, #8ecdff);;
     color: white;
 }
 
@@ -79,7 +79,7 @@ body {
 }
 
 .navbar-links li:hover {
-    background-color: #555;
+    background-color: #958EFF;
 }
 
 .toggle-button {
