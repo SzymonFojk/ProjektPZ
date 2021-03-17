@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+      <link rel="stylesheet" href="{% static 'portal/base_style.css' %}">
+      <link rel="stylesheet" href="{% static 'portal/base_background_styles.css' %}">
+      <script src="{% static 'portal/base_script.js' %}" defer></script>
+      {% if title %}
+        <title>Portal home - {{ title }}</title>
+      {% else %}
+        <title>Portal home</title>
+      {% endif %}
+    </head>
+    <body>
+      <nav class="navbar">
+        <div class="brand-title">Brand Name</div>
+        <a href="#" class="toggle-button">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </a>
+        <div class="navbar-links">
+          <ul>
+            {% if user.is_authenticated %}
+              <li><a href="{% url 'portal-home' %}">Home</a></li>
+              <li><a href="{% url 'profile' username=request.user.username %}">My profile</a></li>
+              <li><a href="{% url 'logout' %}?next=/">Logout</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta charset="utf-8">
+      <div class="container">
+          {% block content %}{% endblock %}
+      </div>
+    </body>
+</html>

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Post
+from django.contrib.auth.decorators import login_required
 
 posts = [
 	{
@@ -17,11 +18,13 @@ posts = [
 	}
 ]
 
+@login_required
 def home(request):
 	context = {
 		'posts': Post.objects.all()
 	}
 	return render(request, 'portal/home.html', context)
+
 
 def about(request):
 	return render(request, 'portal/about.html', {'title':'Witam na stronie'})

@@ -1,8 +1,10 @@
-{% extends 'portal/base.html' %}
+{% extends 'portal/wall.html' %}
 {% block content %}
   {% for post in posts %}
-    <h1>{{ post.title }}</h1>
-    <p>By {{post.author}} on {{post.date_posted}}</p>
-    <p>{{post.content}}</p>
+  <div class="post">
+    <h2>{{ post.title }}</h2>
+    <h5>By <a href="{% url 'profile' username=post.author %}">{{post.author}}</a> on {{post.date_posted}}</h5>
+    <div class="text">{{post.content}}</div>
+  </div>
   {% endfor %}
 {% endblock content %}

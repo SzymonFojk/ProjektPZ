@@ -9,6 +9,7 @@ main {
   font-family: "Heebo", sans-serif;
   width: 100%;
   height: 100%;
+  position: relative;
   overflow: hidden;
   background: linear-gradient(to right, #9c27b0, #8ecdff);
   background-size: cover;
@@ -25,7 +26,8 @@ nav {
   margin: 0px auto;
   z-index: 1;
   display: flex;
-  align-items: coneter;
+  align-items: center;
+
 }
 .nav-links {
   flex: 1;
@@ -40,20 +42,14 @@ nav {
   color: #fff;
   text-decoration: none;
 }
+.nav-links ul li a:hover{
+  color: #FEA900;
+
+}
 #logo {
   font-family: "Lobster", cursive;
   font-weight: lighter;
   font-size: 2rem;
-}
-
-.big-text {
-  position: absolute;
-  top: 61%;
-  left: 22%;
-  transform: translate(-50%, -30%);
-  font-size: 5rem;
-  font-family: "Lobster", cursive;
-  color: rgb(61, 61, 61);
 }
 
 .intro {
@@ -93,31 +89,51 @@ nav {
   display: inline-block;
 }
 
-.friends{
-  width: 612px;
-  height: : 400px;
-  position: absolute;
+.big-text {
+  position: relative;
   top: 0%;
   left: 0%;
+  /*transform: translate(-50%, -30%);*/
+  font-size: 5rem;
+  font-family: "Lobster", cursive;
+  color: rgb(61, 61, 61);
+  transform: translate(8%, -30%)
+
+}
+
+.friends{
+  position: relative;
+  top:  0%;
+  left:  0%;
+
 
 }
 
 .wood{
   width: 612px;
-//  height: : 400px;
+  height: : 400px;
+  position: relative;
+  top:  0%;
+  left: 0%;
+  transform: translate(-97%, 70%)
+
+}
+.frontt{
+  width: 100%;
+  height: 100%;
   position: absolute;
-  top: 50%;
-  left: 2%;
+  left: 0;
+  top: 0;
 
 }
 
 .overlay{
   width: 0;
   height: 0;
-  border-top: 333px solid #fff;
-  border-right: 333px solid transparent;
-  border-bottom: 333px solid #fff;
-  border-left: 333px solid #fff;
+  border-top: 500px solid #fff;
+  border-right: 500px solid transparent;
+  border-bottom: 500px solid #fff;
+  border-left: 500px solid #fff;
   position: absolute;
   left: 0;
   top: 0;
@@ -127,21 +143,24 @@ nav {
 .info{
   width: 1000px;
   height: 1000px;
-  position: absolute;
-  top: 50%;
-  right: -10%;
-  transform: translateY(-50%);
+  position: absolute; 
+  top: -15%;
+  left: 55%;
+  /*transform: translate(64%, -100%);*/
+
+
 }
 
 #circle{
   width: 1000px;
   height: 1000px;
   position: absolute;
-  top: 0;
-  left: 0;
   border-radius: 50%;
   transform: rotate(0deg);
   transition: 1s;
+
+
+
 }
 
 #circle2{
@@ -153,6 +172,7 @@ nav {
   border-radius: 50%;
   transform: rotate(0deg);
   transition: 1s;
+
 }
 
 .feature img{
@@ -167,9 +187,10 @@ nav {
 
 }
 .two{
-  top: 680px;
+  top: 775px;
   right: 55px;
   transform: rotate(-180deg);
+  opacity: 0;
 
 }
 

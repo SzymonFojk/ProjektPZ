@@ -1,0 +1,38 @@
+{% extends 'portal/wall.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ profile_owner.profile.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ profile_owner.username }}</h2>
+          <p class="text-secondary">{{ profile_owner.email }}</p>
+        </div>
+      </div>
+      {% if profile_owner.id == request.user.id %}
+      <h1>{{profile_owner.username}}</h1>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+          <legend class="border-bottom mb-4">Profile Info</legend>
+          {{ u_form|crispy }}
+          {{ p_form|crispy }}
+        </fieldset>
+        <div class="form-group">
+          <button class="btn btn-outline-info" type="submit">Update</button>
+        </div>
+      </form>
+      {%else%}
+        {% if profile_owner in request.user.profile.friends.all %}
+          <a href="{% url 'connect' operation='rm' user_id=profile_owner.id %}">Remove from friends</a>
+        {% else %}
+          <a href="{% url 'connect' operation='add' user_id=profile_owner.id %}">Add to friends</a>
+        {% endif %}
+      {% endif %}
+        <h1>Znajomi</h1>
+        {% for friend in profile_owner.profile.get_friends %}
+          <p><a href="{% url 'profile' username=friend.username %}">{{friend.username}}</a></p>
+        {% endfor %}
+    </div>
+
+{% endblock content %}
