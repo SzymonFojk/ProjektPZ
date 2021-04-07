@@ -1,0 +1,8 @@
+{% extends 'portal/wall.html' %}
+{% block content %}
+<div class="post">
+  <h2>{{ object.title }}</h2>
+  <h5>By <a class="text-dark" href="{% url 'profile' username=post.author %}">{{object.author}}</a> on {{object.date_posted}}</h5>
+  <div class="text">{{object.content}}</div>
+</div>
+{% endblock content %}

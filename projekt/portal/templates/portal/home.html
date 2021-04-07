@@ -1,10 +1,43 @@
 {% extends 'portal/wall.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
   {% for post in posts %}
-  <div class="post">
-    <h2>{{ post.title }}</h2>
-    <h5>By <a href="{% url 'profile' username=post.author %}">{{post.author}}</a> on {{post.date_posted}}</h5>
-    <div class="text">{{post.content}}</div>
+  {% if post.author in request.user.profile.get_friends %}
+
+  <div class="border border-5 rounded shadow-lg p-3" style="margin-top:50px;padding:20px;background-color:#E0E0E0;border-color:#E0E0E0;margin-bottom:-5px;">
+      <h2><a class="text-dark" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+      <h5>By <a class="text-dark" href="{% url 'profile' username=post.author %}">{{post.author.first_name}} {{post.author.last_name}}</a> on {{post.date_posted}}</h5>
+      <div class="text">{{post.content}}</div>
   </div>
+
+
+  <div class="border border-3 rounded-3" style="padding:20px;background-color:#E0E0E0;border-color:#E0E0E0;">
+  <div class="comments border-top border-primary">
+    <h3>Comments</h3>
+    {% for comment in post.comments.all %}
+    <div class="border rounded" style="margin:5px;background-color:#C1C1B9;">
+      <h6 class="" style="margin:5px;" ><a class="text-dark" href="{% url 'profile' username=comment.author %}">{{comment.author.first_name}} {{comment.author.last_name}}</a> on {{comment.date_posted}}</h6>
+      <div class="" style="margin:5px;">
+        {{comment.content}}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <form method="POST">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      <input type="hidden" name="post_id" value="{{post.pk}}">
+      <div class="" style="margin-top:10px;">
+        <textarea name="content" cols="40" rows="10" class="textarea form-control" required="" id="id_content" style="height: 73px;resize:none;" placeholder="Write a comment..."></textarea>
+      </div>
+    </fieldset>
+    <div class="form-group" style="margin-top:10px;">
+      <button class="btn btn-outline-info" type="submit">Add comment</button>
+    </div>
+  </form>
+</div>
+  {% endif %}
   {% endfor %}
+
 {% endblock content %}

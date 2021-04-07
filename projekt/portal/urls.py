@@ -4,10 +4,16 @@ from . import views
 from users import views as user_views
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView
+from django.contrib.auth.decorators import login_required
 
 
 urlpatterns = [
-    path('home/', views.home, name='portal-home'),
+    path('home/', login_required(PostListView.as_view()), name='portal-home'),
+    path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
+    path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
+    path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
+    path('post/new/', PostCreateView.as_view(), name='post-create'),
     path('about/', views.about, name='portal-about'),
     path('register/', user_views.register, name='register'),
     path('profile/<str:username>/', user_views.profile, name='profile'),

@@ -7,6 +7,118 @@ body {
     padding: 0;
 }
 
+
+.znajomi_border{
+  width: 100%%;
+  background: white;
+  text-align: center;
+  margin-bottom: 70px;
+}
+.znajomi_name{
+  width: 100%;
+  margin-bottom: -1px;
+}
+.znajomi_name:hover{
+  border: 1px solid black;
+}
+
+a.one:link, a.one:visited {
+  font-size: 1.5rem;
+  color: black;
+  padding: 0px 1.5rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+a.one:hover, a.one:active {
+}
+
+a:active, a:link{
+  text-decoration: none;
+  color: black;
+}
+
+a:hover{
+  text-decoration: underline;
+  color: black;
+}
+
+.media{
+  width: 100%;
+  padding: 20px;
+  background: white;
+}
+
+
+.text-secondary{
+  font-size: 1.1rem;
+  display: flex;
+  margin-left : 40%;
+
+}
+
+
+.account-heading{
+  /*
+  position: relative;
+  left: 120%;
+  */
+  margin-left: 8%;
+  display: inline-block;
+  text-align: center;
+
+}
+
+.content-section {
+  position: absolute;
+  width: 33%;
+  top: 10%;
+  left: 33%;
+
+}
+
+
+.avatar{
+  width: 185px;
+  height: 185px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 15%;
+  /*
+  margin-right: 80px;
+  position: relative;
+  */
+
+}
+
+.btn_border{
+  width: 100%;
+  background: white;
+}
+
+.btn_friend{
+  margin: 10px;
+  margin-left: 20px;
+  margin-top: 0px;
+
+}
+a.btn_friend:link, a.btn_friend:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a.btn_friend:hover, a.btn_friend:active {
+  background-color: red;
+}
+
+
 .information {
   width: 0;
   height: 0;
@@ -23,7 +135,7 @@ body {
   left: 45%;
   top: 15%;
   color : black;
-  font-size: 50px;  
+  font-size: 50px;
 }
 .text {
   height:200px;

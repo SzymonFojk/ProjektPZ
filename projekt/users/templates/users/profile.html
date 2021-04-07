@@ -1,16 +1,17 @@
 {% extends 'portal/wall.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="content-section">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <div class="border border-5 rounded shadow-lg p-3" style="margin-top:50px;padding:20px;background-color:#E0E0E0;border-color:#E0E0E0;margin-bottom:-5px;">
       <div class="media">
-        <img class="rounded-circle account-img" src="{{ profile_owner.profile.image.url }}">
-        <div class="media-body">
-          <h2 class="account-heading">{{ profile_owner.username }}</h2>
-          <p class="text-secondary">{{ profile_owner.email }}</p>
-        </div>
+        <img class="avatar" src="{{ profile_owner.profile.image.url }}" align="left">
+          <h1 class="account-heading">{{ profile_owner.first_name }} {{profile_owner.last_name}}</h1>
+          <BR>
+              <b class="text-secondary">{{ profile_owner.email }}</b>
+           <BR CLEAR="all">
+
       </div>
-      {% if profile_owner.id == request.user.id %}
-      <h1>{{profile_owner.username}}</h1>
+        {% if profile_owner.id == request.user.id %}
       <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <fieldset class="form-group">
@@ -18,21 +19,29 @@
           {{ u_form|crispy }}
           {{ p_form|crispy }}
         </fieldset>
-        <div class="form-group">
+        <div class="form-group" style="margin-top:10px;">
           <button class="btn btn-outline-info" type="submit">Update</button>
         </div>
       </form>
       {%else%}
-        {% if profile_owner in request.user.profile.friends.all %}
-          <a href="{% url 'connect' operation='rm' user_id=profile_owner.id %}">Remove from friends</a>
-        {% else %}
-          <a href="{% url 'connect' operation='add' user_id=profile_owner.id %}">Add to friends</a>
-        {% endif %}
+        {% if request.user.is_authenticated %}
+          <div class="btn_border">
+          {% if profile_owner in request.user.profile.friends.all %}
+            <a class="btn_friend" href="{% url 'connect' operation='rm' user_id=profile_owner.id %}">Remove from friends</a>
+            {% else %}
+            <a class="btn_friend" href="{% url 'connect' operation='add' user_id=profile_owner.id %}">Add to friends</a>
+            {% endif %}
+          {% endif %}
+          </div>
       {% endif %}
-        <h1>Znajomi</h1>
-        {% for friend in profile_owner.profile.get_friends %}
-          <p><a href="{% url 'profile' username=friend.username %}">{{friend.username}}</a></p>
-        {% endfor %}
+        <div class="znajomi_border" style="margin-top:10px;">
+          <h1>Znajomi</h1>
+          {% for friend in profile_owner.profile.get_friends %}
+            <div class="znajomi_name">
+              <a class="one" href="{% url 'profile' username=friend.username %}">{{friend.first_name}} {{friend.last_name}}</a>
+            </div>
+          {% endfor %}
+        </div>
     </div>
 
 {% endblock content %}
