@@ -1,5 +1,6 @@
 {% extends 'portal/wall.html' %}
 {% block content %}
+<div class="border border-5 rounded shadow-lg p-3" style="margin-top:50px;padding:20px;background-color:#E0E0E0;border-color:#E0E0E0;margin-bottom:-5px;">
   <form method="POST">
     {% csrf_token %}
     <fieldset class="form-group">
@@ -8,7 +9,8 @@
     </fieldset>
     <div class="form-group">
       <button class="btn btn-outline-danger" type="submit">Yes</button>
-      <a class="btn btn-outline-secondary" href="{% url 'post-detail' object.id %}">Cancel</button>
+      <a class="btn btn-outline-secondary" href="{% url 'post-detail' object.id %}">Cancel</a>
     </div>
   </form>
+</div>
 {% endblock content %}

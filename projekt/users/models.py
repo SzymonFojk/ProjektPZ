@@ -14,6 +14,7 @@ class Profile(models.Model):
     def save(self, *args, **kwargs):
 
 
+        super().save()
         img = Image.open(self.image.path)
         if img.height > 300 or img.width > 300:
             img.thumbnail((300, 300))
@@ -25,7 +26,6 @@ class Profile(models.Model):
                 this.image.delete(save=False)
         except:
             pass
-        super(Profile, self).save(*args, **kwargs)
 
     def get_friends(self):
         return self.friends.all()

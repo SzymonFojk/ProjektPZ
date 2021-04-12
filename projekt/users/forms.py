@@ -24,3 +24,31 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['image']
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={
+        "class": "form-control"
+    }))
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control",
+                "id": "user-password"
+            }
+        )
+    )
+    # def clean(self):
+    #     data = super().clean()
+    #     username = data.get("username")
+    #     password = data.get("password")
+
+    def clean_username(self):
+        username = self.cleaned_data.get("username")
+        qs = User.objects.filter(username__iexact=username) # thisIsMyUsername == thisismyusername
+        if not qs.exists():
+            raise forms.ValidationError("This is an invalid user.")
+        if qs.count() != 1:
+            raise forms.ValidationError("This is an invalid user.")
+        return username

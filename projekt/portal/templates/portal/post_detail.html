@@ -1,8 +1,29 @@
 {% extends 'portal/wall.html' %}
 {% block content %}
-<div class="post">
-  <h2>{{ object.title }}</h2>
-  <h5>By <a class="text-dark" href="{% url 'profile' username=post.author %}">{{object.author}}</a> on {{object.date_posted}}</h5>
+<div class="border border-5 rounded shadow-lg p-3" style="margin-top:50px;padding:20px;background-color:#E0E0E0;border-color:#E0E0E0;margin-bottom:-5px;">
+
+  <div>
+    <h2 style="display: inline;">{{ object.title }}</h2>
+    {% if request.user.username == post.author.username %}
+        <a style="display: inline;text-align:right;float:right;" href="{% url 'post-delete' post.id %}">Delete</a>
+        <a style="display: inline;text-align:right;float:right;margin-right:5px;" href="{% url 'post-update' post.id %}">Update</a>
+      {% endif %}
+  </div>
+  <h5>By <a class="text-dark" href="{% url 'profile' username=post.author %}">{{object.author.first_name}} {{object.author.last_name}}</a> on {{object.date_posted}}</h5>
   <div class="text">{{object.content}}</div>
+</div>
+
+<div class="border border-3 rounded-3" style="padding:20px;background-color:#E0E0E0;border-color:#E0E0E0;">
+<div class="comments border-top border-primary">
+  <h3>Comments</h3>
+  {% for comment in post.comments.all %}
+  <div class="border rounded" style="margin:5px;background-color:#C1C1B9;">
+    <h6 class="" style="margin:5px;" ><a class="text-dark" href="{% url 'profile' username=comment.author %}">{{comment.author.first_name}} {{comment.author.last_name}}</a> on {{comment.date_posted}}</h6>
+    <div class="" style="margin:5px;">
+      {{comment.content}}
+    </div>
+  </div>
+  {% endfor %}
+</div>
 </div>
 {% endblock content %}

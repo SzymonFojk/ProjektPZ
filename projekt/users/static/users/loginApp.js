@@ -13,7 +13,7 @@ var login = true;
 function pressed_reg()
 {
   console.log("KLIK");
-   
+
 
   if (login){
   	const t2 = gsap.timeline({ defaults: { ease: "power1.out" } });
@@ -38,7 +38,7 @@ function pressed_reg()
 function pressed_log()
 {
   console.log("KLIK2");
-   
+
   if (!login){
   	const t2 = gsap.timeline({ defaults: { ease: "power1.out" } });
 
@@ -48,17 +48,15 @@ function pressed_log()
   	var rotateValue = circle.style.transform;
   	var rotateSum = rotateValue + "rotate(180deg)";
   	  console.log("xddddddddddd");
-	
+
   	console.log(rotateValue.size);
   	console.log(rotateSum.lenght);
   	    console.log("********************");
-	
-	
+
+
   	circle.style.transform = rotateSum;
   	rotateValue = rotateSum;
   	login = true;
 }
 
 }
-
-

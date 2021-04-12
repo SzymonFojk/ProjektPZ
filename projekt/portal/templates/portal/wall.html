@@ -25,9 +25,16 @@
           <span class="bar"></span>
           <span class="bar"></span>
         </a>
+        {% if user.is_authenticated %}
+        <div class="">
+          <form action="{% url 'search' %}" method="get">
+            <fieldset class="form-group">
+              <input class="form-control" name="q" type="text" placeholder="Search..." style="width: 200%;margin-left:15%;">
+            </fieldset>
+          </form>
+        </div>
         <div class="navbar-links">
           <ul>
-            {% if user.is_authenticated %}
               <li><a href="{% url 'portal-home' %}">Home</a></li>
               <li><a href="{% url 'post-create' %}">New Post</a></li>
               <li><a href="{% url 'profile' username=request.user.username %}">My profile</a></li>

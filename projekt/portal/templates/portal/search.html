@@ -1,0 +1,11 @@
+{% extends 'portal/wall.html' %}
+{% block content %}
+<ul>
+{% for person in object_list %}
+  <div class="border border-5 rounded shadow-lg p-3" style="margin-top:50px;padding:20px;background-color:#E0E0E0;border-color:#E0E0E0;margin-bottom:-5px;">
+    <img class="avatar rounded-circle account-img" src="{{ person.profile.image.url }}" style="width:10%;height:10%;margin-top:-1%;margin-bottom:-1%;">
+    <a class="text-dark" href="{% url 'profile' username=person %}" style="font-size:1.5rem;">{{ person.first_name }} {{ person.last_name }}</a>
+  </div>
+{% endfor %}
+</ul>
+{% endblock content %}

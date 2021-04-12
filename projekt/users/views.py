@@ -1,16 +1,38 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, LoginForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout, get_user_model
 
-def login(request):
 
-        #return HttpResponseRedirect('home/')
 
-        return render(request, 'users/login.html')
+def all(request):
+    if request.method == 'POST':
+        reg = UserRegisterForm(request.POST)
+        log = LoginForm(request.POST)
+        if reg.is_valid():
+            reg.save()
+            username = reg.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}!')
+            return redirect('login')
+        elif log.is_valid():
+            username = log.cleaned_data.get("username")
+            password = log.cleaned_data.get("password")
+            user = authenticate(request, username=username, password=password)
+            if user != None:
+                login(request, user)
+                return redirect("portal-home")
+            else:
+                request.session['invalid_user'] = 1
+    else:
+        reg = UserRegisterForm()
+        log = LoginForm()
+    return render(request, 'users/login.html', {'log':log, 'reg':reg})
+
+
 
 def register(request):
     if request.method == 'POST':
@@ -29,17 +51,15 @@ def profile(request, username = None):
     if username == request.user.username:
         if request.method == 'POST':
             u_form = UserUpdateForm(request.POST, instance=request.user)
-            p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+            p_form = ProfileUpdateForm(data=request.POST, files=request.FILES, instance=request.user.profile)
             if u_form.is_valid() and p_form.is_valid():
                 u_form.save()
                 p_form.save()
-                #messages.success(request, f'Info updated!')
                 return redirect(f'/profile/{request.user.username}')
         else:
             u_form = UserUpdateForm(instance=request.user)
             p_form = ProfileUpdateForm(instance=request.user.profile)
 
-            user_list = User.objects.values()
             context = {
             'u_form' : u_form,
             'p_form' : p_form,
